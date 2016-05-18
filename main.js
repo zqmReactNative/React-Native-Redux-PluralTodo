@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Navigator, View, Text, ListView } from 'react-native';
 
 import TaskList from './TaskList';
+import TaskForm from './TaskForm';
 
 export default class Main extends Component {
 
@@ -25,9 +26,7 @@ export default class Main extends Component {
     switch (route.name) {
       case 'TaskForm':
         return (
-          <View style={{paddingTop: 20}}>
-            <Text>XXX</Text>
-          </View>
+          <TaskForm />
         );
         break;
       default:
