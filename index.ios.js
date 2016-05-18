@@ -50,4 +50,6 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('PluralTodo', () => PluralTodo);
+import Main from './main';
+
+AppRegistry.registerComponent('PluralTodo', () => Main);
