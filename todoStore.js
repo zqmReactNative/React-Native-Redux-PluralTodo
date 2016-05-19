@@ -16,6 +16,7 @@ function todoStore(state = defaultState, action) {
       });
       break;
     default:
+      return state;
 
   }
 }

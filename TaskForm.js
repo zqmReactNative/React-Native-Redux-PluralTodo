@@ -12,13 +12,14 @@ export default class TaskForm extends Component {
 		super(props, context);
 		this.state = {
 			text: '',
+			task: '',
 		};
 	}
 
 	_onAdd = ()=>{
 		console.log('onAdd');
 		if (this.props.onAdd) {
-			this.props.onAdd({task: this.state.text});
+			this.props.onAdd(this.state.task);
 		}
 	}
 	_onCancel = ()=>{
@@ -33,8 +34,7 @@ export default class TaskForm extends Component {
 			<View style={styles.container}>
 				<TextInput
 					style={styles.textInput}
-					onChangeText={(text) => this.setState({text})}
-					value = {this.state.text}
+					onChangeText={(text) => this.setState({task: text})}
 					/>
 
 				<TouchableHighlight onPress={this._onAdd} style={styles.button}>

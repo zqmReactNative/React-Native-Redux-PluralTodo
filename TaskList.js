@@ -21,7 +21,14 @@ export default class TaskList extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    const dataSource = this.state.dataSource.cloneWithRows(nextProps.todos);
+
+    this.setState({ dataSource });
+  }
+
   _renderRow(rowData){
+    console.log('_renderRow');
     return (
       <TaskRow todo={rowData} />
     );

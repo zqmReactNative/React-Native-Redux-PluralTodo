@@ -4,17 +4,20 @@ import { StyleSheet, Navigator, View, Text, ListView } from 'react-native';
 import TaskList from './TaskList';
 import TaskForm from './TaskForm';
 
+import store from './todoStore';
+
 export default class Main extends Component {
 
   constructor(props, context)
   {
     super(props, context);
-    this.state = {
-      todos:[
-        {task: 'Learn React Native'},
-        {task: 'Learn Rudex'},
-      ],
-    }
+    // this.state = {
+    //   todos:[
+    //     {task: 'Learn React Native'},
+    //     {task: 'Learn Rudex'},
+    //   ],
+    // }
+    this.state = store.getState();
   }
 
   onAddStarted = ()=>{
@@ -28,9 +31,13 @@ export default class Main extends Component {
   }
   onAdd = (task)=>{
     console.log('a task was added : ' + task);
-    this.state.todos.push({task});
-    this.setState({
-      todos: this.state.todos
+    // this.state.todos.push({task});
+    // this.setState({
+    //   todos: this.state.todos
+    // });
+    store.dispatch({
+      type: 'ADD_TODO',
+      task,
     });
 
     this.nav.pop();
