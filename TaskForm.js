@@ -2,16 +2,46 @@ import React, { Component, PropTypes } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableHighlight, ListView } from 'react-native';
 
 export default class TaskForm extends Component {
+
+	static propTypes = {
+		onAdd: PropTypes.func.isRequired,
+		onCancel: PropTypes.func.isRequired,
+	}
+
+	constructor(props, context) {
+		super(props, context);
+		this.state = {
+			text: '',
+		};
+	}
+
+	_onAdd = ()=>{
+		console.log('onAdd');
+		if (this.props.onAdd) {
+			this.props.onAdd({task: this.state.text});
+		}
+	}
+	_onCancel = ()=>{
+		console.log('onCancel');
+		if (this.props.onCancel) {
+			this.props.onCancel();
+		}
+	}
+
 	render(){
 		return (
 			<View style={styles.container}>
-				<TextInput style={styles.textInput} />
+				<TextInput
+					style={styles.textInput}
+					onChangeText={(text) => this.setState({text})}
+					value = {this.state.text}
+					/>
 
-				<TouchableHighlight style={styles.button} >
+				<TouchableHighlight onPress={this._onAdd} style={styles.button}>
 					<Text style={styles.buttonTitle}>Add</Text>
 				</TouchableHighlight>
 
-				<TouchableHighlight style={[styles.button, styles.cancelButton]}>
+				<TouchableHighlight onPress={this._onCancel} style={[styles.button, styles.cancelButton]}>
 					<Text style={styles.buttonTitle}>Cancel</Text>
 				</TouchableHighlight>
 			</View>

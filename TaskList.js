@@ -15,6 +15,7 @@ export default class TaskList extends Component {
     const ds = new ListView.DataSource({
       rowHasChanged:(r1, r2)=> r1 !== r2,
     });
+    console.log('props.todos.length : ' + props.todos.length);
     this.state = {
       dataSource: ds.cloneWithRows(props.todos),
     };
@@ -27,6 +28,7 @@ export default class TaskList extends Component {
   }
 
   render() {
+
     return (
       <View style={styles.container}>
         <ListView

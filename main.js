@@ -22,14 +22,39 @@ export default class Main extends Component {
     this.nav.push({name: 'TaskForm'})
   }
 
+  onCancel = ()=>{
+    console.log('cancelled!');
+    this.nav.pop();
+  }
+  onAdd = (task)=>{
+    console.log('a task was added : ' + task);
+    this.state.todos.push({task});
+    this.setState({
+      todos: this.state.todos
+    });
+
+    this.nav.pop();
+  }
+
+  onDone = (todo)=>{
+    console.log('todo was completed : ' + todo.task);
+    const filteredTodos = this.state.todos.filter(
+      (filterTodo) => {
+        return filterTodo !== todo;
+      }
+    );
+    this.setState({todos: filteredTodos});
+  }
+
   _renderScene = (route, navigator)=>{
     switch (route.name) {
       case 'TaskForm':
         return (
-          <TaskForm />
+          <TaskForm onAdd={this.onAdd} onCancel={this.onCancel} />
         );
         break;
       default:
+        console.log('todos.length : ' + this.state.todos.length);
         return (
           <TaskList
             todos={this.state.todos}
@@ -47,6 +72,11 @@ export default class Main extends Component {
       <Navigator
         initialRoute={{name: 'List'}}
         renderScene={this._renderScene}
+        configureScene={
+          (route)=>{
+            return Navigator.SceneConfigs.FloatFromBottom;
+          }
+        }
         ref={(
           (nav)=>{this.nav=nav}
         )}
