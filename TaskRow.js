@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-import { StyleSheet, View, Text, ListView } from 'react-native';
+import { StyleSheet, View, Text, ListView, TouchableHighlight } from 'react-native';
+
+import Swipeout from 'react-native-swipeout';
 
 export default class TaskRow extends Component {
   static propTypes = {
@@ -7,13 +9,39 @@ export default class TaskRow extends Component {
       task: PropTypes.string.isRequired,
     }).isRequired,
   }
+
+  _onPressDone = ()=>{
+    if (this.props.onDone) {
+      this.props.onDone();
+    }else {
+      alert(0);
+    }
+  }
+
   render() {
+    const rightButtons = [
+      {
+        text: 'Done',
+        backgroundColor: '#05a5d1',
+        underlayColor: '#273539',
+        // onPress: this.props.onDone,
+      },
+    ];
     return (
-      <View style={styles.container}>
-        <Text>
-          {this.props.todo.task}
-        </Text>
-      </View>
+      <Swipeout
+        right={rightButtons}
+        >
+        <View style={styles.container}>
+          <Text>
+            {this.props.todo.task}
+          </Text>
+          <TouchableHighlight onPress={this._onPressDone}>
+            <Text>
+              Done
+            </Text>
+          </TouchableHighlight>
+        </View>
+      </Swipeout>
 
     );
   }
@@ -28,9 +56,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 20,
-    marginLeft: 20,
-    marginRight: 20,
+    alignItems: 'center',
+    // marginTop: 20,
+    // marginBottom: 20,
+    // marginLeft: 20,
+    // marginRight: 20,
+    margin: 20,
   },
 
   label: {

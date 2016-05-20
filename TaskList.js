@@ -8,6 +8,7 @@ export default class TaskList extends Component {
   static propTypes = {
     todos: PropTypes.arrayOf(PropTypes.object).isRequired,
     onAddStarted: PropTypes.func.isRequired,
+    onDone: PropTypes.func.isRequired,
   }
   constructor(props, context)
   {
@@ -27,10 +28,16 @@ export default class TaskList extends Component {
     this.setState({ dataSource });
   }
 
+  _onDone = ()=>{
+    if (this.props.onDone) {
+      this.props.onDone();
+    }
+  }
+
   _renderRow(rowData){
     console.log('_renderRow');
     return (
-      <TaskRow todo={rowData} />
+      <TaskRow todo={rowData} onDone={this._onDone}/>
     );
   }
 

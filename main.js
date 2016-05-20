@@ -18,6 +18,9 @@ export default class Main extends Component {
     //   ],
     // }
     this.state = store.getState();
+    store.subscribe(()=> {
+      this.setState(store.getState());
+    });
   }
 
   onAddStarted = ()=>{
@@ -66,6 +69,7 @@ export default class Main extends Component {
           <TaskList
             todos={this.state.todos}
             onAddStarted={this.onAddStarted}
+            onDone={this.onDone}
             />
         );
 

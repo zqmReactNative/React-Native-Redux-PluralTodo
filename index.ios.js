@@ -51,5 +51,6 @@ const styles = StyleSheet.create({
 });
 
 import Main from './main';
+import ExploadingHearts from './ExploadingHearts';
 
 AppRegistry.registerComponent('PluralTodo', () => Main);
