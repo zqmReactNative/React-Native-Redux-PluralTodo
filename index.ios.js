@@ -52,5 +52,6 @@ const styles = StyleSheet.create({
 
 import Main from './main';
 import ExploadingHearts from './ExploadingHearts';
+import HourglassLoading from './HourglassLoading';
 
-AppRegistry.registerComponent('PluralTodo', () => Main);
+AppRegistry.registerComponent('PluralTodo', () => HourglassLoading);
