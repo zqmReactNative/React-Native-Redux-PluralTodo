@@ -2,16 +2,14 @@
 
 import * as types from './actionTypes';
 
-function increase() {
+export function increase() {
 	return {
 		type: types.INCREASE,
 	};
 }
 
-function decrease() {
+export function decrease() {
 	return {
 		type: types.DECREASE,
 	};
 }
-
-
